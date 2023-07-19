@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Tyler",
+        "age": 7,
+        "food_allergies": "Shellfish, Honey, Peanuts",
+        "dietary_restrictions": "Gluten Free"
+    },
+    {
+        "name": "Elisha",
+        "age": 9,
+        "food_allergies": "Peanuts, Corn"
+    },
+    {
+        "name": "Mikayla",
+        "age": 5,
+        "food_allergies": "Soybeans, Shellfish, Coconut",
+        "dietary_restrictions": "Vegetarian"
+    },
+    {
+        "name": "Antonio",
+        "age": 10,
+        "dietary_restrictions": "Vegetarian"
+    },
+    {
+        "name": "Roberto",
+        "age": 6,
+        "food_allergies": "Fish, Apple",
+        "dietary_restrictions": "Vegan"
+    },
+    {
+        "name": "Miguel",
+        "age": 8,
+        "food_allergies": "Carrots"
+    },
+    {
+        "name": "Rachael",
+        "age": 9,
+        "dietary_restrictions": "Pescatarian"
+    },
+    {
+        "name": "Kate",
+        "age": 10,
+        "food_allergies": "Soybeans, Honey, Pineapple, Crab",
+        "dietary_restrictions": "Gluten Free"
+    }, 
+    {
+        "name": "Joe",
+        "age": 6,
+        "dietary_restrictions": "Vegetarian"
+    }
+]
