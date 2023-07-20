@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Rebecca",
+        "email": "rebecca@email.com",
+        "phone": "340-232-3213",
+        "relationship": "Mother"
+    },
+    {
+        "name": "Anthony",
+        "email": "anthony@email.com",
+        "phone": "231-665-7373",
+        "relationship": "Father"
+    },
+    {
+        "name": "Malachai",
+        "email": "malachai@email.com",
+        "phone": "553-910-2216",
+        "relationship": "Father"
+    },
+    {
+        "name": "Sierra",
+        "email": "sierra@email.com",
+        "phone": "678-241-4449",
+        "relationship": "Sister"
+    },
+    {
+        "name": "Kendra",
+        "email": "kendra@email.com",
+        "phone": "767-123-2165",
+        "relationship": "Grandmother"
+    },
+    {
+        "name": "Olivia",
+        "email": "olivia@email.com",
+        "phone": "332-634-9009",
+        "relationship": "Mother"
+    },
+    {
+        "name": "Roberto",
+        "email": "roberto@email.com",
+        "phone": "310-888-4730",
+        "relationship": "Brother"
+    },
+    {
+        "name": "James",
+        "email": "james@email.com",
+        "phone": "215-648-8888",
+        "relationship": "Father"
+    },
+    {
+        "name": "Jackie",
+        "email": "jackie@gmail.com",
+        "phone": "337-725-6789",
+        "relationship": "Grandmother"
+    }
+]
