@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         res.json(childData);
     })
     } catch (err) {
-        res.status(400) .json(err);
+        res.status(400).json(err);
     }
 });
 

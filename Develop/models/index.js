@@ -4,7 +4,6 @@ const User = require('./User');
 
 Contact.hasMany(Child, {
     foreignKey: 'contact_id',
-    onDelete: 'CASCADE'
 });
 
 Child.belongsTo(Contact, {
