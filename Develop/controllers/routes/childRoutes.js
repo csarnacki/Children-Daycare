@@ -21,6 +21,29 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    try {
+        Child.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: {
+                model: Contact,
+                attributes: ['id', 'name', 'email', 'phone', 'relationship']
+            }
+        })
+        .then(childData => {
+            if (!childData) {
+                res.status(400).json({ message: 'No child found with this id' });
+                return;
+            }
+            res.json(childData);
+        })
+    }   catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const newChild = await Child.create({
