@@ -25,6 +25,8 @@ const seedDatabase = async () => {
         });
     }
 
+    console.log('Data seeded successfully!');
+
     process.exit(0);
 };
 
