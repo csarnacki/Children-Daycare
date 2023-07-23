@@ -1,19 +1,58 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+router.get('/', (req, res) => {
+    User.findAll({
+        include: {
+            model: User,
+            attributes: ['id', 'name', 'email', 'password']
+        }
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user found with this id' });
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+router.get('/:id', (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: {
+            model: User,
+            attributes: ['id', 'name', 'email', 'password']
+        }
+    })
+    .then(dbUserData => {
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user found with this id'});
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 router.post('/', async (req, res) => {
-    try {
-        const userData = await User.create(req.body);
-
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.logged_in = true;
-
-            res.status(200).json(userData);
-        });
-    } catch (err) {
-        res.status(400).json(err);
-    }
+    User.create({
+        user_name: req.body.user_name
+    })
+    .then(dbUserData => res.json(dbUserData)
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    }));
 });
 
 router.post('/login', async (req, res) => {
