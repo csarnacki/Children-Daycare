@@ -44,17 +44,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', async (req, res) => {
-    User.create({
-        user_name: req.body.user_name
-    })
-    .then(dbUserData => res.json(dbUserData)
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    }));
-});
-
 router.post('/login', async (req, res) => {
     try {
         const userData = await User.findOne({ where: { email: req.body.email } });
