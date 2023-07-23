@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./config/connect');
+const sequelize = require('../config/connect');
 const { createPromptModule } = require('inquirer');
 
 class Contact extends Model {}
