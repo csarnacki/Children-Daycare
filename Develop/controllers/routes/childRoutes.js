@@ -45,14 +45,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Child.create({
-        child_name: req.body.child_name
-    })
-    .then(dbChildData => res.json(dbChildData)
-    .catch(err => {
+    Child.create(req.body)
+
+    .then(dbChildData => res.json(dbChildData))
+    .catch (err => {
         console.log(err);
         res.status(500).json(err);
-    }));
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -68,7 +67,7 @@ router.put('/:id', (req, res) => {
         }
         res.json(dbChildData);
      })
-     .catch(err => {
+     .catch (err => {
         console.log(err);
         res.status(500).json(err);
      });
@@ -77,7 +76,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     Child.destroy({
         where: {
-            di : req.params.id
+            id : req.params.id
         }
     })
     .then(dbChildData => {
@@ -87,7 +86,7 @@ router.delete('/:id', (req, res) => {
         }
         res.json(dbChildData);
     })
-    .catch(err => {
+    .catch (err => {
         console.log(err);
         res.status(500).json(err);
     });
