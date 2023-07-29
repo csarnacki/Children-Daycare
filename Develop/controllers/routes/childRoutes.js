@@ -2,27 +2,26 @@ const router = require('express').Router();
 const { Child, Contact } = require('../../models');
 
 router.get('/', (req, res) => {
-  try {
     Child.findAll({
         include: {
             model: Contact,
             attributes: ['id', 'name', 'email', 'phone', 'relationship']
         }
     })
-    .then(childData => {
-        if (!childData) {
+    .then(dbChildData => {
+        if (!dbChildData) {
             res.status(400).json({ message: 'No child found with this id' });
             return;
         }
-        res.json(childData);
+        res.json(dbChildData);
     })
-    } catch (err) {
-        res.status(400).json(err);
-    }
+    .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 router.get('/:id', (req, res) => {
-    try {
         Child.findOne({
             where: {
                 id: req.params.id
@@ -32,62 +31,66 @@ router.get('/:id', (req, res) => {
                 attributes: ['id', 'name', 'email', 'phone', 'relationship']
             }
         })
-        .then(childData => {
-            if (!childData) {
+        .then(dbChildData => {
+            if (!dbChildData) {
                 res.status(400).json({ message: 'No child found with this id' });
                 return;
             }
-            res.json(childData);
+            res.json(dbChildData);
         })
-    }   catch (err) {
-        res.status(400).json(err);
-    }
+       .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const newChild = await Child.create({
-            ...req.body,
-            child_id: req.session.child_id,
-        });
-
-        res.status(200).json(newChild);
-    } catch (err) {
-        res.status(400).json(err);
-    }
+router.post('/', (req, res) => {
+    Child.create({
+        child_name: req.body.child_name
+    })
+    .then(dbChildData => res.json(dbChildData)
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    }));
 });
 
-router.put('/:id', async (req, res) => {
-    try {
-        const updateChild = await Child.update({
-            ...req.body,
-            child_id: req.params.id,
-        });
-        
-        res.status(200).json(updateChild);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
-
-router.delete('/:id', async (req, res) => {
-    try {
-        const childData = await Child.destroy({
-            where: {
-                id: req.params.id,
-                child_id: req.session.child_id,
-            },
-        });
-
-        if (!childData) {
-            res.status(400).json({ message: 'No child found with this id'});
+router.put('/:id', (req, res) => {
+     Child.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+     })
+     .then(dbChildData => {
+        if (!dbChildData) {
+            res.status(400).json({ message: 'No child found with this id' });
             return;
         }
+        res.json(dbChildData);
+     })
+     .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+     });
+});
 
-        res.status(200).json(childData);
-    }   catch (err) {
-        res.status(400).json(err);
-    }
+router.delete('/:id', (req, res) => {
+    Child.destroy({
+        where: {
+            di : req.params.id
+        }
+    })
+    .then(dbChildData => {
+        if (!dbChildData) {
+            res.status(400).json({ message: 'No child found with this id' });
+            return;
+        }
+        res.json(dbChildData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 module.exports = router;
