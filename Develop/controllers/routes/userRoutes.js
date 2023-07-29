@@ -2,12 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.get('/', (req, res) => {
-    User.findAll({
-        include: {
-            model: User,
-            attributes: ['id', 'name', 'email', 'password']
-        }
-    })
+    User.findAll({})
     .then(dbUserData => {
         if (!dbUserData) {
             res.status(400).json({ message: 'No user found with this id' });
@@ -26,10 +21,6 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        include: {
-            model: User,
-            attributes: ['id', 'name', 'email', 'password']
-        }
     })
     .then(dbUserData => {
         if (!dbUserData) {
