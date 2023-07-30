@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { Child, Contact } = require('../../models');
 
 router.get('/', (req, res) => {
+    //GET request to obatain all current children data
+
     Child.findAll({
         include: {
             model: Contact,
@@ -22,6 +24,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    //GET request to find one child based off their id
+
         Child.findOne({
             where: {
                 id: req.params.id
@@ -45,6 +49,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    //POST request to create a new instance of a child
+
     Child.create(req.body)
 
     .then(dbChildData => res.json(dbChildData))
@@ -55,6 +61,8 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+    //PUT request to update data for a child
+
      Child.update(req.body, {
         where: {
             id: req.params.id
@@ -74,6 +82,8 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+    //DELETE request to delete data for a child
+    
     Child.destroy({
         where: {
             id : req.params.id

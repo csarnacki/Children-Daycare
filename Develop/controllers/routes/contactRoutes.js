@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { Contact, Child } = require('../../models');
 
 router.get('/', (req, res) => {
+    //GET request to find all contacts
+
         Contact.findAll({
             include: {
                 model: Child,
@@ -22,6 +24,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    //GET request to find one contact based off their id
         Contact.findOne({
             where: {
                 id: req.params.id
@@ -45,6 +48,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    //POST request to create a new instance of a contact
+
    Contact.create(req.body)
 
    .then(dbcontactData => res.json(dbcontactData))
@@ -55,6 +60,8 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
+    //PUT request to update contact data
+
     Contact.update(req.body, {
         where: {
             id: req.params.id
@@ -74,6 +81,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+    //DELETE request to delete contact data
     Contact.destroy({
         where: {
             id: req.params.id

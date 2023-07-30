@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.get('/', (req, res) => {
+    //GET request to obtain all users
+
     User.findAll({})
     .then(dbUserData => {
         if (!dbUserData) {
@@ -17,6 +19,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    //GET request to obtain one user based off their id
+
     User.findOne({
         where: {
             id: req.params.id
@@ -36,6 +40,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    //POST request to create a new instance of a user
+
     User.create(req.body);
 
     req.session.save(() => {
@@ -51,6 +57,8 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    //POST request to log the user in
+
     User.create({
         user_name: req.body.user_name
     })
@@ -60,8 +68,10 @@ router.post('/login', (req, res) => {
         res.status(500).json(err);
     }));
 
+    //Checking the password that is passed in at login
     const validPassword = userData.checkPassword(req.body.password);
 
+    //Authentication check for logging in 
     if (!validPassword) {
         res
             .status(400)
@@ -69,6 +79,7 @@ router.post('/login', (req, res) => {
         return;
     }
 
+    //Saving user credentials when logged in
     req.session.save(() => {
         req.session.user_id = userData.id;
         req.session.logged_in = true;
@@ -78,7 +89,10 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+    //POST request to log the user out
+
     if (req.session.logged_in) {
+        //User session data removed when the user is logged out
         req.session.destroy(() => {
             res.status(200).end();
         });
