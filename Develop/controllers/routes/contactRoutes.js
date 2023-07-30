@@ -2,27 +2,26 @@ const router = require('express').Router();
 const { Contact, Child } = require('../../models');
 
 router.get('/', (req, res) => {
-    try {
         Contact.findAll({
             include: {
                 model: Child,
                 attributes: ['id', 'name', 'age', 'food_allergies', 'dietary_restrictions']
             }
         })
-        .then(contactData => {
-            if (!contactData) {
+        .then(dbcontactData => {
+            if (!dbcontactData) {
                 res.status(400).json({ message: 'No contact found with this id' });
                 return;
             }
-            res.json(contactData);
+            res.json(dbcontactData);
         })
-    } catch (err) {
-            res.status(400).json(err);
-    }
+        .catch (err => {
+            console.log(err);
+            res.status(500).json(err);
+    });
 });
 
 router.get('/:id', (req, res) => {
-    try {
         Contact.findOne({
             where: {
                 id: req.params.id
@@ -32,62 +31,65 @@ router.get('/:id', (req, res) => {
                 attributes: ['id', 'name', 'age', 'food_allergies', 'dietary_restrictions']
             }
         })
-        .then(contactData => {
-            if (!contactData) {
+        .then(dbcontactData => {
+            if (!dbcontactData) {
                 res.status(400).json({ message: 'No contact found with this id' });
                 return;
             }
-            res.json(contactData);
+            res.json(dbcontactData);
         })
-    } catch (err) {
-        res.status(400).json(err);
-    }
+        .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const newContact = await Contact.create({
-            ...req.body,
-            contact_id: req.session.contact_id,
-        });
+router.post('/', (req, res) => {
+   Contact.create(req.body)
 
-        res.status(200).json(newContact);
-    } catch (err) {
-        res.status(400).json(err);
-    }
+   .then(dbcontactData => res.json(dbcontactData))
+   .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+   });
 });
 
 router.put('/:id', async (req, res) => {
-    try {
-        const updateContact = await Contact.update({
-            ...req.body,
-            contact_id: req.params.id,
-        });
-
-        res.status(200).json(updateContact);
-    }  catch (err) {
-        res.status(400).json(err);
-    }
-});
-
-router.delete('/:id', async (req, res) => {
-    try {
-        const contactData = await Contact.destroy({
-            where: {
-                id: req.params.id,
-                contact_id: req.session.contact_id,
-            },
-        });
-
-        if (!contactData) {
+    Contact.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbcontactData => {
+        if (!dbcontactData) {
             res.status(400).json({ message: 'No contact found with this id' });
             return;
         }
+        res.json(dbcontactData);
+    }) 
+    .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
-        res.status(200).json(contactData);
-    }   catch (err) {
-        res.status(400).json(err);
-    }
+router.delete('/:id', async (req, res) => {
+    Contact.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbcontactData => {
+        if (!dbcontactData) {
+            res.status(400).json({ message: 'No contact found with this id' });
+            return;
+        }
+        res.json(dbcontactData);
+    })
+    .catch (err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 module.exports = router;
