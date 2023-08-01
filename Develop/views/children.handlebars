@@ -1,0 +1,11 @@
+{{#each children as |child| }}
+<div class="row mb-4 child">
+    <div class="col-md-5">
+        <h2>
+            {{child.name}}
+            {{child.food_allergies}}
+            {{child.dietary_restrictions}}
+        </h2>
+    </div>
+</div>
+{{/each}}
