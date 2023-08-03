@@ -4,11 +4,11 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        const childData = await User.findAll({
+        const childData = await Child.findAll({
             include: [
                 {
-                    model: User,
-                    attributes: ['name'],
+                    model: Contact,
+                    attributes: ['relationship'],
                 },
             ],
         });
