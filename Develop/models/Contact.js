@@ -28,6 +28,13 @@ Contact.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        child_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'child',
+                key: 'id',
+            },
+        },
     },
     {
         sequelize,
