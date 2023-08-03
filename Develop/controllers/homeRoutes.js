@@ -2,27 +2,10 @@ const router =require('express').Router();
 const { User, Child, Contact } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-    try {
-        const childData = await Child.findAll({
-            include: [
-                {
-                    model: Contact,
-                    attributes: ['name'],
-                },
-            ],
-        });
-
-        const children = childData.map((child) => child.get({ plain: true }));
-
-        res.render('homepage', {
-            children,
-            logged_in: req.session.logged_in
-        });
-    }   catch (err) {
-        res.status(500).json(err);
-    }
-});
+router.get('/', (req, res) => {
+        res.render('login');
+    }   
+);
 
 router.get('/child/:id', async (req, res) => {
     try {
