@@ -1,9 +1,9 @@
-const router =require('express').Router();
+const router = require('express').Router();
 const { User, Child, Contact } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
-   res.render('homepage', { layout: 'main', loggedIn: req.session.logged_in });
+   res.render('homepage', { layout: 'main' });
 });
 
 router.get('/child/:id', async (req, res) => {
