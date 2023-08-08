@@ -1,26 +1,44 @@
 const router = require('express').Router();
-const { User, Child, Contact } = require('../models');
+const { Game, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', (req, res) => {
-   res.render('homepage', { layout: 'main' });
-});
+router.get('/', async (req, res) => {
+   try {
+    const gameData = await Game.findAll({
+        include: [
+            {
+                model: User,
+                attributes: ['name'],
+            },
+        ],
+    });
 
-router.get('/child/:id', async (req, res) => {
+    const games = gameData.map((game) => game.get({ plain: true }));
+
+    res.render('homepage', {
+        games,
+        logged_in: req.session.logged_in
+    });
+   } catch (err) {
+    res.status(500).json(err);
+   }
+});;
+
+router.get('/games/:id', async (req, res) => {
     try {
-        const childData = await Child.findByPk(req.params.id, {
+        const gameData = await Game.findByPk(req.params.id, {
             include: [
                 {
-                    model: Contact,
+                    model: User,
                     attributes: ['name'],
                 },
             ],
         });
 
-        const children = childData.get({ plain: true });
+        const game = gameData.get({ plain: true });
 
-        res.render('children', {
-            ...children,
+        res.render('game', {
+            ...game,
             logged_in: req.session.logged_in
         });
     }   catch (err) {
@@ -31,7 +49,8 @@ router.get('/child/:id', async (req, res) => {
 router.get('/users', withAuth, async (req, res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password'] },
+            include: [{ model: Game }],
         });
 
         const user = userData.get({ plain: true });

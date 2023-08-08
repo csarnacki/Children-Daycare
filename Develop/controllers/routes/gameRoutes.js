@@ -5,12 +5,7 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
     //GET request to obatain all current children data
 
-    Game.findAll({
-        include: {
-            model: Contact,
-            attributes: ['id', 'name', 'date_created', 'genre', 'weeks_playing_for, user_id']
-        }
-    })
+    Game.findAll({})
     .then(dbGameData => {
         if (!dbGameData) {
             res.status(400).json({ message: 'No game found with this id' });
@@ -45,7 +40,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     //POST request to create a new instance of a child
 
     Game.create(req.body)
@@ -78,7 +73,7 @@ router.put('/:id', (req, res) => {
      });
 });
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
     //DELETE request to delete data for a child
     
     Game.destroy({
