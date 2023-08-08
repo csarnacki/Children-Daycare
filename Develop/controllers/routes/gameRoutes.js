@@ -1,21 +1,22 @@
 const router = require('express').Router();
-const { Child, Contact } = require('../../models');
+const { Game } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
     //GET request to obatain all current children data
 
-    Child.findAll({
+    Game.findAll({
         include: {
             model: Contact,
-            attributes: ['id', 'name', 'email', 'phone', 'relationship']
+            attributes: ['id', 'name', 'date_created', 'genre', 'weeks_playing_for, user_id']
         }
     })
-    .then(dbChildData => {
-        if (!dbChildData) {
-            res.status(400).json({ message: 'No child found with this id' });
+    .then(dbGameData => {
+        if (!dbGameData) {
+            res.status(400).json({ message: 'No game found with this id' });
             return;
         }
-        res.json(dbChildData);
+        res.json(dbGameData);
     })
     .catch (err => {
         console.log(err);
@@ -26,21 +27,17 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     //GET request to find one child based off their id
 
-        Child.findOne({
+        Game.findOne({
             where: {
                 id: req.params.id
             },
-            include: {
-                model: Contact,
-                attributes: ['id', 'name', 'email', 'phone', 'relationship']
-            }
         })
-        .then(dbChildData => {
-            if (!dbChildData) {
-                res.status(400).json({ message: 'No child found with this id' });
+        .then(dbGameData => {
+            if (!dbGameData) {
+                res.status(400).json({ message: 'No game found with this id' });
                 return;
             }
-            res.json(dbChildData);
+            res.json(dbGameData);
         })
        .catch (err => {
         console.log(err);
@@ -48,12 +45,12 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     //POST request to create a new instance of a child
 
-    Child.create(req.body)
+    Game.create(req.body)
 
-    .then(dbChildData => res.json(dbChildData))
+    .then(dbGameData => res.json(dbGameData))
     .catch (err => {
         console.log(err);
         res.status(500).json(err);
@@ -63,17 +60,17 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     //PUT request to update data for a child
 
-     Child.update(req.body, {
+     Game.update(req.body, {
         where: {
             id: req.params.id
         }
      })
-     .then(dbChildData => {
-        if (!dbChildData) {
-            res.status(400).json({ message: 'No child found with this id' });
+     .then(dbGameData => {
+        if (!dbGameData) {
+            res.status(400).json({ message: 'No game found with this id' });
             return;
         }
-        res.json(dbChildData);
+        res.json(dbGameData);
      })
      .catch (err => {
         console.log(err);
@@ -81,20 +78,20 @@ router.put('/:id', (req, res) => {
      });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     //DELETE request to delete data for a child
     
-    Child.destroy({
+    Game.destroy({
         where: {
             id : req.params.id
         }
     })
-    .then(dbChildData => {
-        if (!dbChildData) {
-            res.status(400).json({ message: 'No child found with this id' });
+    .then(dbGameData => {
+        if (!dbGameData) {
+            res.status(400).json({ message: 'No game found with this id' });
             return;
         }
-        res.json(dbChildData);
+        res.json(dbGameData);
     })
     .catch (err => {
         console.log(err);
