@@ -20,6 +20,9 @@ Game.init(
             allowNull: false,
             defaultValue: DataTypes.NOW,
         },
+        genre: {
+            type: DataTypes.STRING,
+        },
         weeks_playing_for: {
             type: DataTypes.INTEGER,
             allowNull: false,
