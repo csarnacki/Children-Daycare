@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connect');
-const { createPromptModule } = require('inquirer');
 
-class Contact extends Model {}
+class Game extends Model {}
 
-Contact.init(
+Game.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -16,22 +15,19 @@ Contact.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        email: {
-            type: DataTypes.STRING,
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        weeks_playing_for: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        relationship: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        child_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'child',
+                model: 'user',
                 key: 'id',
             },
         },
@@ -41,9 +37,8 @@ Contact.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'contact',
+        modelName: 'child',
     }
 );
 
-module.exports = Contact;
-
+module.exports = Game;
