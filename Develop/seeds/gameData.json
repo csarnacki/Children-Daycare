@@ -2,27 +2,27 @@
     {
         "name": "Grand Theft Auto 5",
         "genre": "First Person Shooter, Open World",
-        "weeks_played_for": 3
+        "weeks_playing_for": 3
     },
     {
         "name": "Call of Duty: Modern Warfare 2",
         "genre": "First Person Shooter",
-        "weeks_played_for": 1
+        "weeks_playing_for": 1
     },
     {
         "name": "Minecraft",
         "genre": "Survival",
-        "weeks_played_for": 4
+        "weeks_playing_for": 4
     },
     {
         "name": "Ark: Survival Evolved",
         "genre": "Survival, Open World",
-        "weeks_played_for": 3
+        "weeks_playing_for": 3
     },
     {
         "name": "Sims 4",
         "genre": "Simulation",
-        "weeks_played_for": 5
+        "weeks_playing_for": 5
     }
 ]
   
