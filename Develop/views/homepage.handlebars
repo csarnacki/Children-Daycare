@@ -7,17 +7,11 @@
       <a href="/project/{{game.id}}">{{game.name}}</a>
     </h2>
     <p>
-      <span for="img" aria-label="money">💲</span>
-      <!-- Pass needed_funding value to the helper function -->
-      <span class="dollar-amount"></span>
-      needed!
+      I want to play this game for {{game.weeks_playing_for}} weeks
     </p>
-    <p>Created by on </p>
+    <p>Created by {{user.name}} on {{format_date game.date_created}} </p>
   </div>
   <div class="col-md-7">
-    <p>
-      {{game.name}}
-    </p>
   </div>
 </div>
 {{/each}}
