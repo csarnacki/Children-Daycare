@@ -64,16 +64,17 @@ router.get('/users', withAuth, async (req, res) => {
         });
     }   catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 
-/*router.get('/login', (req, res) => {
+router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('./profile');
         return;
     }
 
     res.render('login');
-});*/
+});
 
 module.exports = router;
