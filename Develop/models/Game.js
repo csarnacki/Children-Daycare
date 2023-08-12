@@ -40,7 +40,7 @@ Game.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'child',
+        modelName: 'game',
     }
 );
 

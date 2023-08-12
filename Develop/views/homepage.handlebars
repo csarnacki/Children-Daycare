@@ -1,0 +1,23 @@
+<!-- Loop over each object in the projects array -->
+{{#each games as |game| }}
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h2>
+      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
+      <a href="/project/{{game.id}}">{{game.name}}</a>
+    </h2>
+    <p>
+      <span for="img" aria-label="money">💲</span>
+      <!-- Pass needed_funding value to the helper function -->
+      <span class="dollar-amount"></span>
+      needed!
+    </p>
+    <p>Created by on </p>
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{game.name}}
+    </p>
+  </div>
+</div>
+{{/each}}

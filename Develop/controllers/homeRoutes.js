@@ -2,27 +2,29 @@ const router = require('express').Router();
 const { Game, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+
 router.get('/', async (req, res) => {
-   try {
-    const gameData = await Game.findAll({
+    try {
+    const projectData = await Game.findAll({
         include: [
-            {
-                model: User,
-                attributes: ['name'],
-            },
+          {
+            model: User,
+            attributes: ['name'],
+          },
         ],
     });
 
-    const games = gameData.map((game) => game.get({ plain: true }));
+    //const games = gameData.map((game) => game.get({ plain: true }));
 
-    res.render('homepage', {
-        games,
-        logged_in: req.session.logged_in
-    });
-   } catch (err) {
+    res.render('homepage', { layout: 'main' }/*{
+        //games,
+        //logged_in: req.session.logged_in
+    }*/);
+} catch (err) {
     res.status(500).json(err);
-   }
-});;
+    console.log(err);
+  }
+});
 
 router.get('/games/:id', async (req, res) => {
     try {
@@ -64,13 +66,13 @@ router.get('/users', withAuth, async (req, res) => {
     }
 });
 
-router.get('/login', (req, res) => {
+/*router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('./profile');
         return;
     }
 
     res.render('login');
-});
+});*/
 
 module.exports = router;

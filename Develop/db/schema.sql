@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS Video_game;
-CREATE DATABASE Video_game;
+DROP DATABASE IF EXISTS video_game;
+CREATE DATABASE video_game;
