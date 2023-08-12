@@ -40,7 +40,7 @@ router.get('/games/:id', async (req, res) => {
         const game = gameData.get({ plain: true });
 
         res.render('game', {
-            game,
+            ...game,
             logged_in: req.session.logged_in
         });
     }   catch (err) {
