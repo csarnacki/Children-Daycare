@@ -3,7 +3,7 @@ const { Game } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    //GET request to obatain all current children data
+    //GET request to obatain all current video game data
 
     Game.findAll({})
     .then(dbGameData => {
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    //GET request to find one child based off their id
+    //GET request to find one game based off its id
 
         Game.findOne({
             where: {
@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    //POST request to create a new instance of a child
+    //POST request to create a new instance of a game
 
     Game.create(req.body)
 
@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    //PUT request to update data for a child
+    //PUT request to update data for a game
 
      Game.update(req.body, {
         where: {
@@ -74,7 +74,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    //DELETE request to delete data for a child
+    //DELETE request to delete data for a game
     
     Game.destroy({
         where: {

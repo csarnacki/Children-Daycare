@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-    const projectData = await Game.findAll({
+    const gameData = await Game.findAll({
         include: [
           {
             model: User,
@@ -14,12 +14,12 @@ router.get('/', async (req, res) => {
         ],
     });
 
-    //const games = gameData.map((game) => game.get({ plain: true }));
+    const games = gameData.map((game) => game.get({ plain: true }));
 
-    res.render('homepage', { layout: 'main' }/*{
-        //games,
-        //logged_in: req.session.logged_in
-    }*/);
+    res.render('homepage', { layout: 'main', 
+        games,
+        logged_in: req.session.logged_in
+    });
 } catch (err) {
     res.status(500).json(err);
     console.log(err);
@@ -40,11 +40,12 @@ router.get('/games/:id', async (req, res) => {
         const game = gameData.get({ plain: true });
 
         res.render('game', {
-            ...game,
+            game,
             logged_in: req.session.logged_in
         });
     }   catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 
