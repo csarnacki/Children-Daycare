@@ -56,20 +56,20 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     //POST request to log the user in
-
-    User.create({
-        user_name: req.body.user_name
-    })
-    .then(dbUserData => res.json(dbUserData)
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    }));
+    try {
+       const userData = await User.findOne({ where: { email: req.body.email } });
+       
+       if (!userData) {
+        res
+            .status(400)
+            .json({ message: 'Incorrect email or password. Please try again' });
+        return;
+       }
 
     //Checking the password that is passed in at login
-    const validPassword = userData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(req.body.password);
 
     //Authentication check for logging in 
     if (!validPassword) {
@@ -77,8 +77,7 @@ router.post('/login', (req, res) => {
             .status(400)
             .json({ message: "Incorrect email or password. Please try again"});
         return;
-    }
-
+        }
     //Saving user credentials when logged in
     req.session.save(() => {
         req.session.user_id = userData.id;
@@ -86,6 +85,11 @@ router.post('/login', (req, res) => {
 
         res.json({ user: userData, message: 'Login Successful!' });
     });
+
+    } catch (err) {
+        res.status(400).json(err);
+        console.log(err);
+    }
 });
 
 router.post('/logout', (req, res) => {
