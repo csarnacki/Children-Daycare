@@ -39,22 +39,25 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     //POST request to create a new instance of a user
 
-    User.create(req.body);
+    try {
+        const userData = await User.create(req.body);
 
-    req.session.save(() => {
-        req.session.user_id = userData.id;
-        req.session.logged_in = true;
-
-        res.status(200).json(userData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
+    
+            res.status(200).json(userData);
+    
     });
+    }   catch(err)  {
+        res.status(500).json(err);
+        console.log(err);
+    }
 });
+
 
 router.post('/login', async (req, res) => {
     //POST request to log the user in
@@ -98,6 +101,7 @@ router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
         //User session data removed when the user is logged out
         req.session.destroy(() => {
+            res.json({ message: 'User logged out!' });
             res.status(200).end();
         });
     } else {
