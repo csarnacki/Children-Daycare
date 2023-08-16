@@ -1,6 +1,6 @@
 const logout = async () => {
     const response = await fetch('/routes/users/logout', {
-        methodL: 'POST',
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     });
 

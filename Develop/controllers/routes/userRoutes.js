@@ -95,10 +95,17 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/logout', (req, res) => {
+router.delete('/logout', (req, res) => {
     //POST request to log the user out
 
-    if (req.session.logged_in) {
+    req.session.destroy(err => {
+        if (err) {
+            res.status(400).send('Something occurred while trying to log out');
+        } else {
+            res.status(200).send('Logout successful');
+        }
+    });
+    /*if (req.session.logged_in) {
         //User session data removed when the user is logged out
         req.session.destroy(() => {
             res.json({ message: 'User logged out!' });
@@ -106,7 +113,7 @@ router.post('/logout', (req, res) => {
         });
     } else {
         res.status(400).end();
-    }
+    }*/
 });
 
 module.exports = router;
