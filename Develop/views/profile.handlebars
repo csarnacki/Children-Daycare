@@ -5,25 +5,44 @@
 </div>
 
 <div class="row mt-4">
-    <div class="col-md-6">
-        <h3>You are now logged in</h3>
+  <div class="col-md-6">
+    <h3>Add a New Game:</h3>
+
+    <form class="form new-game-form">
+      <div class="form-group">
+        <label for="game-name">Game Name:</label>
+        <input class="form-input" type="text" id="game-name" name="game-name" />
+      </div>
+      <div class="form-group">
+        <label for="game-genre">Genre:</label>
+        <input class="form-input" type="text" id="game-genre" name="game-genre" />
+      </div>
+      <div class="form-group">
+        <label for="play-length">How Many Weeks Do You Want To Play?:</label>
+        <textarea class="form-input" id="number" name="play-length"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+
+    {{#if game.length}}
+  <div class="col-md-6 game-list">
+    <h3>Current Game Playlist:</h3>
+
+    {{#each games as |game|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/game/{{game.id}}">{{game.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{game.id}}">DELETE</button>
+      </div>
     </div>
+    {{/each}}
+  </div>
+  {{/if}}
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-4">
-        <div id="logout">
-            <button type="submit" class="btn btn-success">Logout</button>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-md-6">
-        <button type="submit" class="btn btn-primary">View Profile</button>
-    </div>
-</div>
-
-<div class="row mb-2">
-    <h4>You have been active since July 2023</h4>
-</div>
+<script src="./js/profile.js"></script>
