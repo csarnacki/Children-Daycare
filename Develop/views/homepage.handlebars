@@ -1,17 +1,18 @@
-<!-- Loop over each object in the projects array -->
+<!-- Loop over each object in the games array -->
 {{#each games as |game| }}
 <div class="row mb-4 project">
   <div class="col-md-5">
     <h2>
-      <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-      <a href="/project/{{game.id}}">{{game.name}}</a>
+      <div id="game-title">
+        <a href="/project/{{game.id}}">{{game.name}}</a>
+      </div>
     </h2>
-    <p>
-      I want to play this game for {{game.weeks_playing_for}} weeks
-    </p>
-    <p>Created by {{user.name}} on {{format_date game.date_created}} </p>
+    <div class="content">
+      <p> 
+        I want to play this game for {{game.weeks_playing_for}} weeks
+      </p>
+      <p>Created by {{user.name}} on {{format_date game.date_created}} </p>
   </div>
-  <div class="col-md-7">
   </div>
 </div>
 {{/each}}
