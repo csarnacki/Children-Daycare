@@ -2,7 +2,7 @@ const newFormHandler = async (event) => {
     event.preventDefault();
 
     const name = document.querySelector('#game-name').value.trim();
-    const weeks_playing = document.querySelector('#weeks-playing').value.trim();
+    const weeks_playing = document.querySelector('#weeks-playing');
     const genre = document.querySelector('#genre').value.trim();
 
     if (name && weeks_playing && genre) {
