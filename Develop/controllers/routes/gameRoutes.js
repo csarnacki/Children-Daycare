@@ -40,16 +40,20 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     //POST request to create a new instance of a game
 
-    Game.create(req.body)
+    try {
+        const newGame = await Game.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        });
 
-    .then(dbGameData => res.json(dbGameData))
-    .catch (err => {
+        res.status(200).json(newGame);
+    } catch(err) {
+        res.status(400).json(err);
         console.log(err);
-        res.status(500).json(err);
-    });
+    }
 });
 
 router.put('/:id', (req, res) => {

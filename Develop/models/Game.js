@@ -24,7 +24,7 @@ Game.init(
             type: DataTypes.STRING,
         },
         weeks_playing_for: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         user_id: {

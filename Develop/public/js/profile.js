@@ -2,11 +2,11 @@ const newFormHandler = async (event) => {
     event.preventDefault();
 
     const name = document.querySelector('#game-name').value.trim();
-    const weeks_playing_for = document.querySelector('#weeks-playing-for');
+    const weeks_playing_for = document.querySelector('#weeks-playing-for').value.trim();
     const genre = document.querySelector('#genre').value.trim();
 
     if (name && weeks_playing_for && genre) {
-        const response = await fetch('/routes/games', {
+        const response = await fetch(`/routes/games`, {
             method: 'POST',
             body: JSON.stringify({ name, weeks_playing_for, genre }),
             headers: { 'Content-Type': 'application/json'},
