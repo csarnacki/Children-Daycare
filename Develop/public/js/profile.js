@@ -2,13 +2,13 @@ const newFormHandler = async (event) => {
     event.preventDefault();
 
     const name = document.querySelector('#game-name').value.trim();
-    const weeks_playing = document.querySelector('#weeks-playing');
+    const weeks_playing_for = document.querySelector('#weeks-playing-for');
     const genre = document.querySelector('#genre').value.trim();
 
-    if (name && weeks_playing && genre) {
+    if (name && weeks_playing_for && genre) {
         const response = await fetch('/routes/games', {
             method: 'POST',
-            body: JSON.stringify({ name, weeks_playing, genre }),
+            body: JSON.stringify({ name, weeks_playing_for, genre }),
             headers: { 'Content-Type': 'application/json'},
         });
 
@@ -20,6 +20,7 @@ const newFormHandler = async (event) => {
     };
 };
 
+/*
 const deleteButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
         const id = event.target.getAttribute('data-id');
@@ -35,11 +36,14 @@ const deleteButtonHandler = async (event) => {
         }
     }
 };
+*/
 
 document
     .querySelector('.new-game-list')
     .addEventListener('submit', newFormHandler);
 
+/*    
 document
     .querySelector('.game-list')
     .addEventListener('click', deleteButtonHandler);
+*/

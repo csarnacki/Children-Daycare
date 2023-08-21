@@ -1,0 +1,90 @@
+h1 {
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+#login {
+    margin-left: 100px;
+    margin-top: 15px;
+    background-color: #28A341;
+    padding: 10px 10px;
+    border-radius: 25%;
+}
+
+#login a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.login-form {
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+.login-form input[type=text] {
+    margin: 8px;
+}
+
+.login-form button {
+    background-color: #28A341;
+    border-radius: 10%;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.signup-form {
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+.signup-form input[type=text] {
+    margin: 8px;
+}
+
+.signup-form button {
+    background-color: #28A341;
+    border-radius: 10%;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+#logout {
+    margin-left: 150px;
+    background-color: #C61B11;
+    color: #ffffff;
+    margin-top: 15px;
+    padding: 10px 10px;
+    border-radius: 25%;
+}
+
+#profile {
+    margin-left: 100px;
+    background-color: #EAE544;
+    margin-top: 15px;
+    padding: 10px 10px;
+    border-radius: 25%;
+}
+
+#profile a {
+    text-decoration: none;
+    color: #0B0B0B;
+}
+
+.new-game-list {
+    font-family: Verdana, Tahoma, sans-serif;
+}
+
+.new-game-list input[type=text] {
+    margin: 8px;
+}
+
+.new-game-list button {
+    background-color: #28A341;
+    border-radius: 10%;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+
