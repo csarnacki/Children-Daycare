@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/games/:id', async (req, res) => {
+router.get('/game/:id', async (req, res) => {
     try {
         const gameData = await Game.findByPk(req.params.id, {
             include: [
